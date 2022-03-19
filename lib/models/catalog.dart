@@ -1,14 +1,5 @@
 class CatalogModel {
-  static final items = [
-    Item(
-      id: 1,
-      name: "Coffee",
-      desc:
-          "Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. Coffee is brewed by diluting a large amount of nearly boiling water with the roasted coffee beans.",
-      imageUrl: "https://thumbs.dreamstime.com/b/cup-cofee-20825194.jpg",
-      price: 10.0,
-    ),
-  ];
+  static List<Item> items = [];
 }
 
 class Item {
@@ -16,7 +7,7 @@ class Item {
   final String name;
   final String desc;
   final String imageUrl;
-  final double price;
+  final int price;
 
   Item({
     required this.id,
@@ -25,4 +16,22 @@ class Item {
     required this.imageUrl,
     required this.price,
   });
+// Choosing between 2 constructor like Animal-> dog,cat
+  factory Item.fromMap(Map<String, dynamic> json) {
+    return Item(
+      id: json['id'],
+      name: json['name'],
+      desc: json['desc'],
+      imageUrl: json["imageUrl"],
+      price: json['price'],
+    );
+  }
+
+  toMap() => {
+        'id': id,
+        'name': name,
+        'desc': desc,
+        'imageUrl': imageUrl,
+        'price': price,
+      };
 }
